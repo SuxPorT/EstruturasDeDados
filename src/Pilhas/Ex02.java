@@ -1,4 +1,5 @@
 package Pilhas;
+
 import Pilhas.Classes.ValidadorExpressao;
 
 public class Ex02 {

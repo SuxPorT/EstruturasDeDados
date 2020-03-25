@@ -1,7 +1,9 @@
 package Pilhas.Classes;
 
 public class Pilha {
-    private int topo, dados[], MAX;
+    private int topo;
+    private int[] dados;
+    private int MAX;
 
     public Pilha(int max) {
         this.topo = -1;
