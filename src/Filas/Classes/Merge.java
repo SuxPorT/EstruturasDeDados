@@ -11,11 +11,6 @@ public class Merge {
         this.segundaFila = segundaFila;
         this.setTamanho();
         this.mergeFilas();
-        this.organizaResultado();
-    }
-
-    public String imprime() {
-        return this.resultado.imprime();
     }
 
     private void setTamanho() {
@@ -29,16 +24,14 @@ public class Merge {
 
         if (this.primeiraFila.tamanho <= this.segundaFila.tamanho) {
             while (!this.primeiraFila.vazia()) {
-                valorA = this.primeiraFila.remove();
-                valorB = this.segundaFila.remove();
+                valorA = this.primeiraFila.primeiro();
+                valorB = this.segundaFila.primeiro();
 
                 if (valorA <= valorB) {
-                    this.resultado.insere(valorA);
-                    this.resultado.insere(valorB);
+                    this.resultado.insere(this.primeiraFila.remove());
                 }
                 else {
-                    this.resultado.insere(valorB);
-                    this.resultado.insere(valorA);
+                    this.resultado.insere(this.segundaFila.remove());
                 }
             }
 
@@ -48,16 +41,14 @@ public class Merge {
         }
         else {
             while (!this.segundaFila.vazia()) {
-                valorA = this.primeiraFila.remove();
-                valorB = this.segundaFila.remove();
+                valorA = this.primeiraFila.primeiro();
+                valorB = this.segundaFila.primeiro();
 
                 if (valorA <= valorB) {
-                    this.resultado.insere(valorA);
-                    this.resultado.insere(valorB);
+                    this.resultado.insere(this.primeiraFila.remove());
                 }
                 else {
-                    this.resultado.insere(valorB);
-                    this.resultado.insere(valorA);
+                    this.resultado.insere(this.segundaFila.remove());
                 }
             }
 
@@ -67,25 +58,12 @@ public class Merge {
         }
     }
 
-    private void organizaResultado() {
-        int dados[] = new int[this.tamanho];
+    public String imprime() {
+        return this.resultado.imprime();
+    }
 
-        for (int i = 0; i < this.tamanho; i++) {
-            dados[i] = this.resultado.remove();
-        }
-
-        for (int i = 0; i < this.tamanho - 1; i++) {
-            for (int j = i + 1; j < this.tamanho; j++) {
-                if (dados[i] > dados[j]) {
-                    int troca = dados[i];
-                    dados[i] = dados[j];
-                    dados[j] = troca;
-                }
-            }
-        }
-
-        for (int i = 0; i < this.tamanho; i++) {
-            this.resultado.insere(dados[i]);
-        }
+    // Método auxiliar
+    public int getTamanho() {
+        return this.tamanho;
     }
 }

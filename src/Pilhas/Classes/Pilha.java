@@ -2,13 +2,13 @@ package Pilhas.Classes;
 
 public class Pilha {
     private int topo;
-    private int[] dados;
+    private int dados[];
     private int MAX;
 
     public Pilha(int max) {
         this.topo = -1;
         this.MAX = max;
-        this.dados = new int[max];
+        this.dados = new int[this.MAX];
     }
 
     public int topo() {
@@ -24,7 +24,7 @@ public class Pilha {
     }
 
     public boolean cheia() {
-        if (this.dados.length - 1 == this.topo) {
+        if (this.MAX - 1 == this.topo) {
             return true;
         }
 
@@ -43,11 +43,13 @@ public class Pilha {
     public int desempilha() {
         if (!this.vazia()) {
             int elemento = this.dados[this.topo];
-            this.topo--;
+            this.dados[this.topo--] = 0;
+
             return elemento;
         }
         else {
             System.out.println("Impossível desempilhar. A pilha está vazia");
+
             return -1;
         }
     }
@@ -58,12 +60,14 @@ public class Pilha {
         this.MAX = n;
     }
 
+    // Método auxiliar
     @Override
     public String toString() {
         String toString;
 
         if (!this.vazia()) {
             toString = "[";
+
             for (int i = 0; i < this.topo; i++) {
                 toString += this.dados[i] + ", ";
             }
@@ -71,7 +75,7 @@ public class Pilha {
             toString += this.dados[this.topo] + "]";
         }
         else {
-            toString = "[]";
+            toString = "[ ]";
         }
 
         return toString;

@@ -3,7 +3,7 @@ package Filas.Classes;
 public class Fila {
     private int primeiro;
     private int ultimo;
-    private int[] dados;
+    private int dados[];
     public int tamanho;     // Variável auxiliar
 
     public Fila(int capacidade) {
@@ -15,7 +15,7 @@ public class Fila {
 
     public boolean cheia() {
         if ((this.primeiro == 0 && this.ultimo == this.tamanho - 1)
-             || (this.primeiro == this.ultimo + 1)) {
+                || (this.primeiro == this.ultimo + 1)) {
             return true;
         }
 
@@ -36,8 +36,7 @@ public class Fila {
             if (this.vazia()) {
                 this.primeiro++;
             }
-        }
-        else {
+        } else {
             System.out.println("Fila está cheia. Impossível adicionar o elemento " + e);
         }
     }
@@ -57,9 +56,9 @@ public class Fila {
             }
 
             return elemento;
-        }
-        else {
+        } else {
             System.out.println("Fila está vazia. Impossível remover o primeiro elemento");
+
             return -1;
         }
     }
@@ -98,5 +97,18 @@ public class Fila {
         this.ultimo = -1;
         this.dados = new int[n];
         this.tamanho = this.dados.length;
+    }
+
+    // Métodos auxiliares
+    public int primeiro() {
+        if (!this.vazia()) {
+            return this.dados[this.primeiro];
+        }
+
+        return -1;
+    }
+
+    public int getTamanho() {
+        return this.tamanho;
     }
 }

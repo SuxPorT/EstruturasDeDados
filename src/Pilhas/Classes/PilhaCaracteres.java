@@ -27,7 +27,7 @@ public class PilhaCaracteres {
                 this.topo--;
             }
             else {
-                empilha(caractere);
+                this.empilha(caractere);
             }
         }
         else {
@@ -35,20 +35,21 @@ public class PilhaCaracteres {
         }
     }
 
+    // Método auxiliar
     @Override
     public String toString() {
         String toString;
 
         if (!this.vazia()) {
-            toString = "[";
+            toString = "[ ";
             for (int i = 0; i < this.topo; i++) {
                 toString += this.caracteres[i] + ", ";
             }
 
-            toString += this.caracteres[this.topo] + "]";
+            toString += this.caracteres[this.topo] + " ]";
         }
         else {
-            toString = "[]";
+            toString = "[ ]";
         }
 
         return toString;

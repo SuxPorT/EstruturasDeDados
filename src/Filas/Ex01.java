@@ -51,7 +51,6 @@ public class Ex01 {
         }
         // Fila [1, 2, 3, 0, 0]
         imprimeResultado(fila);
-
     }
 
     public static void imprimeResultado(Fila fila) {
