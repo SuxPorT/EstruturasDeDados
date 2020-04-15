@@ -1,9 +1,9 @@
-package ListasEncadeadas.Classes;
+package ListaDuplamenteEncadeada.Classes;
 
-public class ListaEncadeada {
+public class ListaDuplamenteEncadeada {
     private Node lista;
 
-    public ListaEncadeada() {
+    public ListaDuplamenteEncadeada() {
         this.lista = null;
     }
 
@@ -14,6 +14,11 @@ public class ListaEncadeada {
     public void inserePrimeiro(int info) {
         Node primeiroNode = new Node(info);
         primeiroNode.setProximo(this.lista);
+
+        if (!this.vazia()) {
+            this.lista.setAnterior(primeiroNode);
+        }
+
         this.lista = primeiroNode;
     }
 
@@ -26,7 +31,13 @@ public class ListaEncadeada {
                 if (nodeAtual.getInformacao().equals(node.getInformacao())) {
                     Node novoNode = new Node(info);
                     novoNode.setProximo(nodeAtual.getProximo());
+
+                    if (nodeAtual.getProximo() != null) {
+                        nodeAtual.getProximo().setAnterior(novoNode);
+                    }
+
                     nodeAtual.setProximo(novoNode);
+                    novoNode.setAnterior(nodeAtual);
 
                     loop = false;
                 }
@@ -52,6 +63,7 @@ public class ListaEncadeada {
                 if (nodeAtual.getProximo() == null) {
                     Node novoNode = new Node(info);
                     nodeAtual.setProximo(novoNode);
+                    novoNode.setAnterior(nodeAtual);
 
                     loop = false;
                 }
@@ -83,6 +95,8 @@ public class ListaEncadeada {
                     else if (nodeAnterior.getInformacao() <= info && nodeAtual.getInformacao() >= info) {
                         Node nodeOrdenado = new Node(info);
                         nodeOrdenado.setProximo(nodeAtual);
+                        nodeAtual.setAnterior(nodeOrdenado);
+                        nodeAnterior.setAnterior(nodeAnterior);
                         nodeAnterior.setProximo(nodeOrdenado);
 
                         loop = false;
@@ -96,7 +110,7 @@ public class ListaEncadeada {
                 }
             }
             else {
-                System.out.println("Lista encadeada não está ordenada. Impossível inserir o elemento " + info);
+                System.out.println("Lista duplamente encadeada não está ordenada. Impossível inserir o elemento " + info);
             }
         }
         else {
@@ -108,6 +122,11 @@ public class ListaEncadeada {
         if (!this.vazia()) {
             Node primeiroNode = new Node(this.lista.getInformacao());
             primeiroNode.setProximo(this.lista.getProximo());
+
+            if (this.lista.getProximo() != null) {
+                this.lista.getProximo().setAnterior(null);
+            }
+
             this.lista = this.lista.getProximo();
 
             return primeiroNode;
@@ -125,12 +144,14 @@ public class ListaEncadeada {
             while (true) {
                 if (nodeAtual.getProximo() == null) {
                     ultimoNode.setInformacao(nodeAtual.getInformacao());
+                    ultimoNode.setAnterior(nodeAtual.getAnterior());
 
                     if (nodeAnterior == nodeAtual) {
                         this.lista = null;
                     }
                     else {
                         nodeAnterior.setProximo(null);
+                        nodeAtual.setAnterior(null);
                     }
 
                     return ultimoNode;
@@ -154,12 +175,24 @@ public class ListaEncadeada {
                 if (nodeAtual.getInformacao().equals(no.getInformacao())) {
                     Node nodeRemovido = new Node(nodeAtual.getInformacao());
                     nodeRemovido.setProximo(nodeAtual.getProximo());
+                    nodeRemovido.setAnterior(nodeAtual.getAnterior());
 
                     if (nodeAnterior == nodeAtual) {
                         this.lista = this.lista.getProximo();
+
+                        if (this.lista != null) {
+                            this.lista.getAnterior().setProximo(null);
+                            this.lista.setAnterior(null);
+                        }
                     }
                     else {
                         nodeAnterior.setProximo(nodeAtual.getProximo());
+                        nodeAtual.setAnterior(null);
+
+                        if (nodeAtual.getProximo() != null) {
+                            nodeAtual.getProximo().setAnterior(nodeAnterior);
+                            nodeAtual.setProximo(null);
+                        }
                     }
 
                     return nodeRemovido;
@@ -219,7 +252,7 @@ public class ListaEncadeada {
     }
 
     private void primeiroNode(int informacao) {
-        System.out.println("Lista encadeada está vazia. Armazenando o elemento " + informacao + " na primeira posição");
+        System.out.println("Lista duplamente encadeada está vazia. Armazenando o elemento " + informacao + " na primeira posição");
         this.inserePrimeiro(informacao);
     }
 }

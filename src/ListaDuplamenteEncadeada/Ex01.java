@@ -1,12 +1,12 @@
-package ListasEncadeadas;
+package ListaDuplamenteEncadeada;
 
-import ListasEncadeadas.Classes.ListaEncadeada;
-import ListasEncadeadas.Classes.Node;
+import ListaDuplamenteEncadeada.Classes.ListaDuplamenteEncadeada;
+import ListaDuplamenteEncadeada.Classes.Node;
 
 public class Ex01 {
 
     public static void main(String[] args) {
-        ListaEncadeada lista = new ListaEncadeada();
+        ListaDuplamenteEncadeada lista = new ListaDuplamenteEncadeada();
         Node primeiroNode = new Node(2);
         Node segundoNode = new Node(5);
 
@@ -66,7 +66,7 @@ public class Ex01 {
         imprimirResultado(lista);
     }
 
-    public static void imprimirResultado(ListaEncadeada lista) {
+    public static void imprimirResultado(ListaDuplamenteEncadeada lista) {
         System.out.println("Lista encadeada: " + lista.imprimir());
         System.out.println("Lista está ordenada: " + lista.isOrdenada() + "\n");
     }

@@ -1,4 +1,4 @@
-package ListasEncadeadas.Classes;
+package FilasPilhasComListas.Classes;
 
 public class ListaEncadeada {
     private Node lista;
@@ -219,7 +219,7 @@ public class ListaEncadeada {
     }
 
     private void primeiroNode(int informacao) {
-        System.out.println("Lista encadeada está vazia. Armazenando o elemento " + informacao + " na primeira posição");
+        System.out.println("Estrutura está vazia. Armazenando o elemento " + informacao + " na primeira posição");
         this.inserePrimeiro(informacao);
     }
 }

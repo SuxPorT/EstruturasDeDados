@@ -1,10 +1,12 @@
-package ListasEncadeadas.Classes;
+package ListaDuplamenteEncadeada.Classes;
 
 public class Node {
     private Integer informacao;
+    private Node anterior;
     private Node proximo;
 
     public Node(Integer informacao) {
+        this.anterior = null;
         this.informacao = informacao;
         this.proximo = null;
     }
@@ -15,6 +17,14 @@ public class Node {
 
     public Integer getInformacao() {
         return this.informacao;
+    }
+
+    public void setAnterior(Node anterior) {
+        this.anterior = anterior;
+    }
+
+    public Node getAnterior() {
+        return this.anterior;
     }
 
     public void setProximo(Node proximo) {

@@ -1,4 +1,4 @@
-package ListasEncadeadas.Classes;
+package FilasPilhasComListas.Classes;
 
 public class Node {
     private Integer informacao;
