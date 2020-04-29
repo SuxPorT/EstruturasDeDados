@@ -3,4 +3,9 @@
 - [X] **Vetores**
 - [X] **Pilhas**
 - [X] **Filas**
-- [ ] **Listas encadeadas**
+- [X] **Listas encadeadas**
+- [X] **Lista duplamente encadeada**
+- [ ] **Lista encadeada circular**
+- [ ] **Lista duplamente encadeada circular**
+- [X] **Busca Binária**
+- [ ] **Árvore Binária**

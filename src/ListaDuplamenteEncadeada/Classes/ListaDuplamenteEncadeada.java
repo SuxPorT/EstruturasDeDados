@@ -252,7 +252,8 @@ public class ListaDuplamenteEncadeada {
     }
 
     private void primeiroNode(int informacao) {
-        System.out.println("Lista duplamente encadeada está vazia. Armazenando o elemento " + informacao + " na primeira posição");
+        System.out.println("Lista duplamente encadeada está vazia. Armazenando o elemento " + informacao +
+                           " na primeira posição");
         this.inserePrimeiro(informacao);
     }
 }
