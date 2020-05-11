@@ -1,32 +1,38 @@
 package ArvoreBinaria.Classes;
 
 public class ArvoreBinaria {
-    private Node raiz;
+    public Node raiz;
 
-    public ArvoreBinaria(Node raiz) {
-        this.raiz = raiz;
+    public ArvoreBinaria() {
+        this.raiz = null;
     }
 
-    public void inserirElemento(Node raiz, Node elemento) {
-        if (elemento.getInfo() >= raiz.getInfo()) {
-            if (raiz.getDireita() == null) {
-                raiz.setDireita(elemento);
-            }
-            else {
-                inserirElemento(raiz.getDireita(), elemento);
-            }
-        }
-        else {
-            if (raiz.getEsquerda() == null) {
-                raiz.setEsquerda(elemento);
-            }
-            else {
-                inserirElemento(raiz.getEsquerda(), elemento);
-            }
-        }
+    // Métodos auxiliares
+    private boolean vazia() {
+        return this.raiz == null;
     }
 
-    public void preOrdem(Node raiz) {
+    // Métodos privados
+    private void inserirElemento(Node raiz, int elemento) {
+       if (elemento < raiz.getInfo()) {
+           if (raiz.getEsquerda() == null) {
+               raiz.setEsquerda(new Node(elemento));
+           }
+           else {
+               this.inserirElemento(raiz.getEsquerda(), elemento);
+           }
+       }
+       else {
+           if (raiz.getDireita() == null) {
+               raiz.setDireita(new Node(elemento));
+           }
+           else {
+               this.inserirElemento(raiz.getDireita(), elemento);
+           }
+       }
+    }
+
+    private void preOrdem(Node raiz) {
         if (raiz != null) {
             System.out.print(raiz.getInfo() + " ");
             preOrdem(raiz.getEsquerda());
@@ -34,7 +40,7 @@ public class ArvoreBinaria {
         }
     }
 
-    public void inOrdem(Node raiz) {
+    private void inOrdem(Node raiz) {
         if (raiz != null) {
             inOrdem(raiz.getEsquerda());
             System.out.print(raiz.getInfo() + " ");
@@ -42,7 +48,7 @@ public class ArvoreBinaria {
         }
     }
 
-    public void posOrdem(Node raiz) {
+    private void posOrdem(Node raiz) {
         if (raiz != null) {
             posOrdem(raiz.getEsquerda());
             posOrdem(raiz.getDireita());
@@ -50,28 +56,202 @@ public class ArvoreBinaria {
         }
     }
 
-    public Node maiorElemento(Node raiz) {
-        Node nodeDireito = raiz.getDireita();
+    private Node maiorElemento(Node raiz) {
+        Node maiorNode = raiz.getDireita();
 
-        if (nodeDireito == null) {
+        if (maiorNode != null) {
+            if (maiorNode.getDireita() == null) {
+                if (maiorNode.getEsquerda() == null) {
+                    raiz.setDireita(null);
+                } else {
+                    raiz.setDireita(maiorNode.getEsquerda());
+                }
 
-            return raiz;
+                return maiorNode;
+            }
+
+            return maiorElemento(maiorNode);
         }
 
-        return maiorElemento(nodeDireito);
+        return raiz;
     }
 
-    public Node menorElemento(Node raiz) {
-        Node nodeEsquerdo = raiz.getEsquerda();
+    private Node menorElemento(Node raiz) {
+        Node menorNode = raiz.getEsquerda();
 
-        if (nodeEsquerdo == null) {
-            return raiz;
+        if (menorNode != null) {
+            if (menorNode.getEsquerda() == null) {
+                if (menorNode.getDireita() == null) {
+                    raiz.setEsquerda(null);
+                } else {
+                    raiz.setEsquerda(menorNode.getDireita());
+                }
+
+                return menorNode;
+            }
+
+            return menorElemento(menorNode);
         }
 
-        return menorElemento(nodeEsquerdo);
+        return null;
     }
 
-    public Node remove(Node raiz, Node elemento) {
+    private Node remove(Node nodeFilho, Node nodePai, int elemento) {
+        if (nodeFilho != null) {
+            if (nodeFilho.getInfo() != elemento) {
+                if (elemento >= nodeFilho.getInfo()) {
+                    return this.remove(nodeFilho.getDireita(), nodeFilho, elemento);
+                }
+
+                return this.remove(nodeFilho.getEsquerda(), nodeFilho, elemento);
+            }
+            else {
+                boolean isNodeDireito = nodeFilho.getInfo() >= nodePai.getInfo();
+
+                if (nodeFilho.getEsquerda() == null && nodeFilho.getDireita() == null) {
+                    if (isNodeDireito) {
+                        nodePai.setDireita(null);
+                    }
+                    else {
+                        nodePai.setEsquerda(null);
+                    }
+
+                    return nodeFilho;
+                }
+                else if (nodeFilho.getEsquerda() == null && nodeFilho.getDireita() != null) {
+                    if (isNodeDireito) {
+                        nodePai.setDireita(nodeFilho.getDireita());
+                    }
+                    else {
+                        nodePai.setEsquerda(nodeFilho.getDireita());
+                    }
+
+                    return nodeFilho;
+                }
+                else if (nodeFilho.getEsquerda() != null && nodeFilho.getDireita() == null) {
+                    if (isNodeDireito) {
+                        nodePai.setDireita(nodeFilho.getEsquerda());
+                    }
+                    else {
+                        nodePai.setEsquerda(nodeFilho.getEsquerda());
+                    }
+
+                    return nodeFilho;
+                }
+                else {
+                    Node maiorNode = this.maiorElemento(nodeFilho.getDireita());
+
+                    if (isNodeDireito) {
+                        nodePai.setDireita(maiorNode);
+                        maiorNode.setEsquerda(nodeFilho.getEsquerda());
+                    }
+                    else {
+                        nodePai.setEsquerda(maiorNode);
+                        maiorNode.setEsquerda(nodeFilho.getEsquerda());
+                    }
+
+                    return nodeFilho;
+                }
+            }
+        }
+
+        return null;
+    }
+
+    // Métodos públicos
+    public void inserirElemento(int elemento) {
+        if (this.vazia()) {
+            this.raiz = new Node(elemento);
+        }
+        else {
+            this.inserirElemento(this.raiz, elemento);
+        }
+    }
+
+    public void preOrdem() {
+        this.preOrdem(this.raiz);
+    }
+
+    public void inOrdem() {
+        this.inOrdem(this.raiz);
+    }
+
+    public void posOrdem() {
+        this.posOrdem(this.raiz);
+    }
+
+    public Node maiorElemento() {
+        if (!this.vazia()) {
+            if (this.raiz.getDireita() == null) {
+                Node nodeRaiz = this.raiz;
+                this.raiz = this.raiz.getEsquerda();
+
+                return nodeRaiz;
+            }
+
+            return this.maiorElemento(this.raiz);
+        }
+
+        return null;
+    }
+
+    public Node menorElemento() {
+        if (!this.vazia()) {
+            if (this.raiz.getEsquerda() == null) {
+                Node nodeRaiz = this.raiz;
+                this.raiz = this.raiz.getDireita();
+
+                return nodeRaiz;
+            }
+
+            return this.menorElemento(this.raiz);
+        }
+
+        return null;
+    }
+
+    public Node remove(int elemento) {
+        if (!this.vazia()) {
+            Node nodeRaiz = this.raiz;
+
+            if (this.raiz.getInfo() != elemento) {
+                return this.remove(nodeRaiz, null, elemento);
+            }
+            else {
+                if (nodeRaiz.getEsquerda() == null && nodeRaiz.getDireita() == null) {
+                    this.raiz = null;
+
+                    return nodeRaiz;
+                }
+                else if (nodeRaiz.getEsquerda() == null && nodeRaiz.getDireita() != null) {
+                    if (elemento >= nodeRaiz.getDireita().getInfo()) {
+                        this.raiz = this.raiz.getDireita();
+
+                        return nodeRaiz;
+                    }
+
+                    return null;
+                }
+                else if (nodeRaiz.getEsquerda() != null && nodeRaiz.getDireita() == null) {
+                    if (elemento < nodeRaiz.getEsquerda().getInfo()) {
+                        this.raiz = this.raiz.getEsquerda();
+
+                        return nodeRaiz;
+                    }
+
+                    return null;
+                }
+                else {
+                    if (elemento >= nodeRaiz.getDireita().getInfo()) {
+                        return this.remove(nodeRaiz.getDireita(), nodeRaiz, elemento);
+                    }
+                    else {
+                        return this.remove(nodeRaiz.getEsquerda(), nodeRaiz, elemento);
+                    }
+                }
+            }
+        }
+
         return null;
     }
 }

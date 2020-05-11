@@ -6,34 +6,76 @@ import ArvoreBinaria.Classes.Node;
 public class Ex01 {
 
     public static void main(String[] args) {
-        Node nodeRaiz = new Node(14);
+        int[] listaElementos = {14, 15, 4, 9, 7, 18, 3, 5, 16, 20, 17, 8};
 
-        Node[] listaNodes = {
-                new Node(15), new Node(4), new Node(9), new Node(7),
-                new Node(18), new Node(3), new Node(5), new Node(16),
-                new Node(4), new Node(20), new Node(17), new Node(9),
-                new Node(14), new Node(5)
-        };
+        ArvoreBinaria arvore = new ArvoreBinaria();
 
-        ArvoreBinaria arvore = new ArvoreBinaria(nodeRaiz);
-
-        for (int i = 0; i < listaNodes.length; i++) {
-            arvore.inserirElemento(nodeRaiz, listaNodes[i]);
+        for (int elemento : listaElementos) {
+            arvore.inserirElemento(elemento);
         }
 
+        mostrarArvore(arvore);
+        System.out.println();
+
+        for (int i = 0; i < 4; i++) {
+            Node maiorElemento = arvore.maiorElemento();
+
+            System.out.print("Maior elemento: ");
+
+            if (maiorElemento == null) {
+                System.out.println("null");
+            }
+            else {
+                System.out.println(maiorElemento.getInfo());
+            }
+        }
+
+        mostrarArvore(arvore);
+        System.out.println();
+
+        for (int i = 0; i < 4; i++) {
+            Node menorElemento = arvore.menorElemento();
+
+            System.out.print("Menor elemento: ");
+
+            if (menorElemento == null) {
+                System.out.println("null");
+            }
+            else {
+                System.out.println(menorElemento.getInfo());
+            }
+        }
+
+        mostrarArvore(arvore);
+
+        arvore.inserirElemento(7);
+        arvore.inserirElemento(10);
+
+        System.out.println("\nNova árvore: ");
+        mostrarArvore(arvore);
+        System.out.println();
+
+        int[] removerElementos = {15, 8, 9};
+
+        for (int elemento: removerElementos) {
+            System.out.println("Elemento removido: " + arvore.remove(elemento).getInfo());
+        }
+
+        System.out.println("Árvore final:");
+        mostrarArvore(arvore);
+    }
+
+    public static void mostrarArvore(ArvoreBinaria arvore) {
         System.out.print("Pré-ordem: ");
-        arvore.preOrdem(nodeRaiz);
+        arvore.preOrdem();
         System.out.println();
 
         System.out.print("In-ordem: ");
-        arvore.inOrdem(nodeRaiz);
+        arvore.inOrdem();
         System.out.println();
 
         System.out.print("Pós-ordem: ");
-        arvore.posOrdem(nodeRaiz);
+        arvore.posOrdem();
         System.out.println();
-
-        System.out.println("Maior elemento: " + arvore.maiorElemento(nodeRaiz).getInfo());
-        System.out.println("Menor elemento: " + arvore.menorElemento(nodeRaiz).getInfo());
     }
 }

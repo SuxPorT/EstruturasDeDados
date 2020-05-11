@@ -52,13 +52,11 @@ public class Main {
     public static void mostrarPilha(Pilha pilha) {
         System.out.println("Topo da pilha: " + pilha.topo());
         System.out.println("Pilha está vazia: " + pilha.vazia());
-        System.out.println("Tamanho da pilha: " + pilha.tamanho());
         System.out.println("Pilha: " + pilha.mostra_pilha() + "\n");
     }
 
     public static void mostrarFila(Fila fila) {
         System.out.println("Fila está vazia: " + fila.vazia());
-        System.out.println("Tamanho da fila: " + fila.tamanho());
         System.out.println("Fila: " + fila.mostra_fila() + "\n");
     }
 }

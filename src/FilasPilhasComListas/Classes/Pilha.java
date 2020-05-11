@@ -2,21 +2,17 @@ package FilasPilhasComListas.Classes;
 
 public class Pilha {
     private ListaEncadeada dados;
-    private int tamanho;         	// Variável auxiliar
 
     public Pilha() {
         this.dados = new ListaEncadeada();
-        this.tamanho = 0;
     }
 
     public void empilha(int dado) {
         this.dados.insereUltimo(dado);
-        this.tamanho++;
     }
 
     public int desempilha() {
         if (!this.vazia()) {
-            this.tamanho--;
             return this.dados.removeUltimo().getInformacao();
         }
 
@@ -43,9 +39,5 @@ public class Pilha {
     // Métodos auxiliares
     public boolean vazia() {
         return this.dados.vazia();
-    }
-
-    public int tamanho() {
-        return this.tamanho;
     }
 }

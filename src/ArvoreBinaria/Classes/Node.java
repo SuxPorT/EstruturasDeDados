@@ -5,8 +5,8 @@ public class Node {
     private Node esquerda, direita;
 
     public Node(int info) {
-        this.esquerda = null;
         this.info = info;
+        this.esquerda = null;
         this.direita = null;
     }
 

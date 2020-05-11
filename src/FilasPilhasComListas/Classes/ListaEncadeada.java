@@ -121,8 +121,9 @@ public class ListaEncadeada {
             Node nodeAtual = this.lista;
             Node nodeAnterior = this.lista;
             Node ultimoNode = new Node(null);
+            boolean loop = true;
 
-            while (true) {
+            while (loop) {
                 if (nodeAtual.getProximo() == null) {
                     ultimoNode.setInformacao(nodeAtual.getInformacao());
 
@@ -132,6 +133,8 @@ public class ListaEncadeada {
                     else {
                         nodeAnterior.setProximo(null);
                     }
+
+                    loop = false;
 
                     return ultimoNode;
                 }
