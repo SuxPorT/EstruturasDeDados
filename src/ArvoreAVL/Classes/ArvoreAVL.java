@@ -1,9 +1,9 @@
-package ArvoreBinaria.Classes;
+package ArvoreAVL.Classes;
 
-public class ArvoreBinaria {
+public class ArvoreAVL {
     public Node raiz;
 
-    public ArvoreBinaria() {
+    public ArvoreAVL() {
         this.raiz = null;
     }
 
@@ -12,47 +12,81 @@ public class ArvoreBinaria {
         return this.raiz == null;
     }
 
+    private int balanceamento(Node raiz) {
+        return this.altura(raiz.getEsquerda()) - this.altura(raiz.getDireita());
+    }
+
+    private void rotacionarDireita(Node nodeFilho, Node nodePai) {
+        Node novoNode = nodeFilho.getEsquerda();
+        Node nodeTemporario = novoNode.getDireita();
+        novoNode.setDireita(nodeFilho);
+        nodeFilho.setEsquerda(nodeTemporario);
+
+        if (nodePai == null) {
+            this.raiz = novoNode;
+        }
+        else {
+            nodePai.setDireita(novoNode);
+        }
+    }
+
+    private void rotacionarEsquerda(Node nodeFilho, Node nodePai) {
+        Node novoNode = nodeFilho.getDireita();
+        Node nodeTemporario = novoNode.getEsquerda();
+        novoNode.setEsquerda(nodeFilho);
+        nodeFilho.setDireita(nodeTemporario);
+
+        if (nodePai == null) {
+            this.raiz = novoNode;
+        }
+        else {
+            nodePai.setEsquerda(novoNode);
+        }
+    }
+
+    private void rotacionar(Node raiz) {
+        int primeiroBalanceamento = this.balanceamento(raiz);
+        int segundoBalanceamento;
+
+        if (primeiroBalanceamento == -2) {
+            segundoBalanceamento = this.balanceamento(raiz.getDireita());
+
+            if (segundoBalanceamento == -1) {
+                this.rotacionarDireita(raiz.getDireita(), raiz);
+            }
+
+            this.rotacionarEsquerda(raiz, null);
+        }
+        else if (primeiroBalanceamento == 2) {
+            segundoBalanceamento = this.balanceamento(raiz.getEsquerda());
+
+            if (segundoBalanceamento == -1) {
+                this.rotacionarEsquerda(raiz.getEsquerda(), raiz);
+            }
+
+            this.rotacionarDireita(raiz, null);
+        }
+    }
+
     // Métodos privados
     private void inserirElemento(Node raiz, int elemento) {
-       if (elemento < raiz.getInfo()) {
-           if (raiz.getEsquerda() == null) {
-               raiz.setEsquerda(new Node(elemento));
-           }
-           else {
-               this.inserirElemento(raiz.getEsquerda(), elemento);
-           }
-       }
-       else {
-           if (raiz.getDireita() == null) {
-               raiz.setDireita(new Node(elemento));
-           }
-           else {
-               this.inserirElemento(raiz.getDireita(), elemento);
-           }
-       }
-    }
-
-    private void preOrdem(Node raiz) {
-        if (raiz != null) {
-            System.out.print(raiz.getInfo() + " ");
-            this.preOrdem(raiz.getEsquerda());
-            this.preOrdem(raiz.getDireita());
+        if (elemento < raiz.getInfo()) {
+            if (raiz.getEsquerda() == null) {
+                raiz.setEsquerda(new Node(elemento));
+                this.rotacionar(this.raiz);
+            }
+            else {
+                this.inserirElemento(raiz.getEsquerda(), elemento);
+            }
         }
-    }
-
-    private void inOrdem(Node raiz) {
-        if (raiz != null) {
-            this.inOrdem(raiz.getEsquerda());
-            System.out.print(raiz.getInfo() + " ");
-            this.inOrdem(raiz.getDireita());
-        }
-    }
-
-    private void posOrdem(Node raiz) {
-        if (raiz != null) {
-            this.posOrdem(raiz.getEsquerda());
-            this.posOrdem(raiz.getDireita());
-            System.out.print(raiz.getInfo() + " ");
+        else {
+            if (raiz.getDireita() == null) {
+                raiz.setDireita(new Node(elemento));
+                this.rotacionar(this.raiz);
+            }
+            else {
+                this.inserirElemento(raiz.getDireita(), elemento);
+            }
         }
     }
 
@@ -131,6 +165,10 @@ public class ArvoreBinaria {
                     else {
                         nodePai.setEsquerda(nodeFilho.getEsquerda());
                     }
+
+                    this.rotacionar(this.raiz);
+
+                    return nodeFilho;
                 }
                 else {
                     Node maiorNode = this.maiorElemento(nodeFilho.getDireita());
@@ -145,11 +183,68 @@ public class ArvoreBinaria {
                     maiorNode.setEsquerda(nodeFilho.getEsquerda());
                 }
 
+                this.rotacionar(this.raiz);
+
                 return nodeFilho;
             }
         }
 
         return null;
+    }
+
+    private boolean busca(Node raiz, int elemento) {
+        if (raiz != null) {
+            if (raiz.getInfo() != elemento) {
+                if (elemento > raiz.getInfo()) {
+                    return this.busca(raiz.getDireita(), elemento);
+                }
+
+                return this.busca(raiz.getEsquerda(), elemento);
+            }
+
+            return true;
+        }
+
+        return false;
+    }
+
+    private void preOrdem(Node raiz) {
+        if (raiz != null) {
+            System.out.print(raiz.getInfo() + " ");
+            this.preOrdem(raiz.getEsquerda());
+            this.preOrdem(raiz.getDireita());
+        }
+    }
+
+    private void inOrdem(Node raiz) {
+        if (raiz != null) {
+            this.inOrdem(raiz.getEsquerda());
+            System.out.print(raiz.getInfo() + " ");
+            this.inOrdem(raiz.getDireita());
+        }
+    }
+
+    private void posOrdem(Node raiz) {
+        if (raiz != null) {
+            this.posOrdem(raiz.getEsquerda());
+            this.posOrdem(raiz.getDireita());
+            System.out.print(raiz.getInfo() + " ");
+        }
+    }
+
+    private int altura(Node raiz) {
+        if (raiz == null) {
+            return -1;
+        }
+
+        int alturaEsquerda = altura(raiz.getEsquerda());
+        int alturaDireita = altura(raiz.getDireita());
+
+        if (alturaEsquerda > alturaDireita) {
+            return 1 + alturaEsquerda;
+        }
+
+        return 1 + alturaDireita;
     }
 
     // Métodos públicos
@@ -160,18 +255,6 @@ public class ArvoreBinaria {
         else {
             this.inserirElemento(this.raiz, elemento);
         }
-    }
-
-    public void preOrdem() {
-        this.preOrdem(this.raiz);
-    }
-
-    public void inOrdem() {
-        this.inOrdem(this.raiz);
-    }
-
-    public void posOrdem() {
-        this.posOrdem(this.raiz);
     }
 
     public Node maiorElemento() {
@@ -247,5 +330,25 @@ public class ArvoreBinaria {
         }
 
         return null;
+    }
+
+    public boolean busca(int elemento) {
+        return this.busca(this.raiz, elemento);
+    }
+
+    public void preOrdem() {
+        this.preOrdem(this.raiz);
+    }
+
+    public void inOrdem() {
+        this.inOrdem(this.raiz);
+    }
+
+    public void posOrdem() {
+        this.posOrdem(this.raiz);
+    }
+
+    public int altura() {
+        return this.altura(this.raiz);
     }
 }

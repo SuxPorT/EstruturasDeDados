@@ -8,4 +8,5 @@
 - [ ] **Lista encadeada circular**
 - [ ] **Lista duplamente encadeada circular**
 - [X] **Busca Binária**
-- [ ] **Árvore Binária**
+- [X] **Árvore Binária**
+- [ ] **Árvore AVL**

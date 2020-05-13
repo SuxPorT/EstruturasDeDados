@@ -3,7 +3,7 @@ package ListaDuplamenteEncadeada;
 import ListaDuplamenteEncadeada.Classes.ListaDuplamenteEncadeada;
 import ListaDuplamenteEncadeada.Classes.Node;
 
-public class Ex01 {
+public class Main {
 
     public static void main(String[] args) {
         ListaDuplamenteEncadeada lista = new ListaDuplamenteEncadeada();

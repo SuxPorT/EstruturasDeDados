@@ -1,6 +1,6 @@
 package BuscaBinaria;
 
-public class Ex01 {
+public class Main {
 
     public static void main(String[] args) {
         int dados[] = {10, 12, 14, 15, 22, 37};

@@ -3,7 +3,7 @@ package ArvoreBinaria;
 import ArvoreBinaria.Classes.ArvoreBinaria;
 import ArvoreBinaria.Classes.Node;
 
-public class Ex01 {
+public class Main {
 
     public static void main(String[] args) {
         int[] listaElementos = {14, 15, 4, 9, 7, 18, 3, 5, 16, 20, 17, 8};

@@ -1,6 +1,6 @@
 package ListaDuplamenteEncadeadaCircular;
 
-public class Ex01 {
+public class Main {
 
     public void main(String args[]) {
 
