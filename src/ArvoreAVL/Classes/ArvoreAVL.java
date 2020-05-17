@@ -51,7 +51,7 @@ public class ArvoreAVL {
         if (primeiroBalanceamento == -2) {
             segundoBalanceamento = this.balanceamento(raiz.getDireita());
 
-            if (segundoBalanceamento == -1) {
+            if (segundoBalanceamento == 1) {
                 this.rotacionarDireita(raiz.getDireita(), raiz);
             }
 
@@ -73,7 +73,6 @@ public class ArvoreAVL {
         if (elemento < raiz.getInfo()) {
             if (raiz.getEsquerda() == null) {
                 raiz.setEsquerda(new Node(elemento));
-                this.rotacionar(this.raiz);
             }
             else {
                 this.inserirElemento(raiz.getEsquerda(), elemento);
@@ -82,12 +81,13 @@ public class ArvoreAVL {
         else {
             if (raiz.getDireita() == null) {
                 raiz.setDireita(new Node(elemento));
-                this.rotacionar(this.raiz);
             }
             else {
                 this.inserirElemento(raiz.getDireita(), elemento);
             }
         }
+
+        this.rotacionar(this.raiz);
     }
 
     private Node maiorElemento(Node raiz) {
@@ -165,10 +165,6 @@ public class ArvoreAVL {
                     else {
                         nodePai.setEsquerda(nodeFilho.getEsquerda());
                     }
-
-                    this.rotacionar(this.raiz);
-
-                    return nodeFilho;
                 }
                 else {
                     Node maiorNode = this.maiorElemento(nodeFilho.getDireita());
@@ -183,7 +179,7 @@ public class ArvoreAVL {
                     maiorNode.setEsquerda(nodeFilho.getEsquerda());
                 }
 
-                this.rotacionar(this.raiz);
+                this.rotacionar(nodePai);
 
                 return nodeFilho;
             }
@@ -306,8 +302,6 @@ public class ArvoreAVL {
 
                         return nodeRaiz;
                     }
-
-                    return null;
                 }
                 else if (nodeRaiz.getEsquerda() != null && nodeRaiz.getDireita() == null) {
                     if (elemento < nodeRaiz.getEsquerda().getInfo()) {
@@ -315,8 +309,6 @@ public class ArvoreAVL {
 
                         return nodeRaiz;
                     }
-
-                    return null;
                 }
                 else {
                     if (elemento >= nodeRaiz.getDireita().getInfo()) {
@@ -326,6 +318,8 @@ public class ArvoreAVL {
                         return this.remove(nodeRaiz.getEsquerda(), nodeRaiz, elemento);
                     }
                 }
+
+                return null;
             }
         }
 

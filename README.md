@@ -9,4 +9,4 @@
 - [ ] **Lista duplamente encadeada circular**
 - [X] **Busca Binária**
 - [X] **Árvore Binária**
-- [ ] **Árvore AVL**
+- [X] **Árvore AVL**

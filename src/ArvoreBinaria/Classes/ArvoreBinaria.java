@@ -223,8 +223,6 @@ public class ArvoreBinaria {
 
                         return nodeRaiz;
                     }
-
-                    return null;
                 }
                 else if (nodeRaiz.getEsquerda() != null && nodeRaiz.getDireita() == null) {
                     if (elemento < nodeRaiz.getEsquerda().getInfo()) {
@@ -232,8 +230,6 @@ public class ArvoreBinaria {
 
                         return nodeRaiz;
                     }
-
-                    return null;
                 }
                 else {
                     if (elemento >= nodeRaiz.getDireita().getInfo()) {
@@ -243,6 +239,8 @@ public class ArvoreBinaria {
                         return this.remove(nodeRaiz.getEsquerda(), nodeRaiz, elemento);
                     }
                 }
+
+                return null;
             }
         }
 
