@@ -10,3 +10,4 @@
 - [X] **Busca Binária**
 - [X] **Árvore Binária**
 - [X] **Árvore AVL**
+- [X] **Tabela Hash**

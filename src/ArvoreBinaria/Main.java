@@ -15,7 +15,6 @@ public class Main {
         }
 
         mostrarArvore(arvore);
-        System.out.println();
 
         for (int i = 0; i < 4; i++) {
             Node maiorElemento = arvore.maiorElemento();
@@ -31,7 +30,6 @@ public class Main {
         }
 
         mostrarArvore(arvore);
-        System.out.println();
 
         for (int i = 0; i < 4; i++) {
             Node menorElemento = arvore.menorElemento();
@@ -51,9 +49,8 @@ public class Main {
         arvore.inserirElemento(7);
         arvore.inserirElemento(10);
 
-        System.out.println("\nNova árvore: ");
+        System.out.println("Nova árvore: ");
         mostrarArvore(arvore);
-        System.out.println();
 
         int[] removerElementos = {15, 8, 9};
 
@@ -76,6 +73,6 @@ public class Main {
 
         System.out.print("Pós-ordem: ");
         arvore.posOrdem();
-        System.out.println();
+        System.out.println("\n");
     }
 }

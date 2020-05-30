@@ -15,13 +15,11 @@ public class Main {
 
         System.out.println("Árvore desbalanceada à esquerda");
         mostrarArvore(arvore);
-        System.out.println();
 
         arvore.inserirElemento(1);
 
         System.out.println("Árvore rotacionada à direita");
         mostrarArvore(arvore);
-        System.out.println();
 
         arvore = new ArvoreAVL();
 
@@ -34,26 +32,22 @@ public class Main {
         System.out.println("Elemento 21 está dentro da árvore: " + arvore.busca(21));
         System.out.println("Árvore desbalanceada à direita");
         mostrarArvore(arvore);
-        System.out.println();
 
         arvore.inserirElemento(21);
 
         System.out.println("Elemento 21 está dentro da árvore: " + arvore.busca(21));
         System.out.println("Árvore rotacionada à esquerda");
         mostrarArvore(arvore);
-        System.out.println();
 
         arvore.remove(15);
         arvore.remove(14);
 
         System.out.println("Árvore desbalanceada com elementos removidos à esquerda");
         mostrarArvore(arvore);
-        System.out.println();
 
         arvore.remove(4);
         System.out.println("Árvore balanceada");
         mostrarArvore(arvore);
-        System.out.println();
     }
 
     public static void mostrarArvore(ArvoreAVL arvore) {
@@ -67,6 +61,6 @@ public class Main {
 
         System.out.print("Pós-ordem: ");
         arvore.posOrdem();
-        System.out.println();
+        System.out.println("\n");
     }
 }

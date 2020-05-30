@@ -87,7 +87,7 @@ public class ArvoreAVL {
             }
         }
 
-        this.rotacionar(this.raiz);
+        this.rotacionar(raiz);
     }
 
     private Node maiorElemento(Node raiz) {
@@ -233,8 +233,8 @@ public class ArvoreAVL {
             return -1;
         }
 
-        int alturaEsquerda = altura(raiz.getEsquerda());
-        int alturaDireita = altura(raiz.getDireita());
+        int alturaEsquerda = this.altura(raiz.getEsquerda());
+        int alturaDireita = this.altura(raiz.getDireita());
 
         if (alturaEsquerda > alturaDireita) {
             return 1 + alturaEsquerda;
