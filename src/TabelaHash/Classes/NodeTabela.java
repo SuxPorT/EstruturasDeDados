@@ -24,10 +24,8 @@ public class NodeTabela {
     }
 
     public boolean busca(int chave) {
-        ListaEncadeada lista = this.lista;
-
-        if (lista != null && !lista.vazia()) {
-            Node node = lista.getNode();
+        if (this.lista != null && !this.lista.vazia()) {
+            Node node = this.lista.getNode();
             boolean loop = true;
 
             while (loop) {

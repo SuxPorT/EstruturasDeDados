@@ -42,8 +42,6 @@ public class TabelaHash {
 
     public void imprimir() {
         for (int i = 0; i < this.tabela.length; i++) {
-            NodeTabela linhaTabela = this.tabela[i];
-
             System.out.println(i + "    " + this.tabela[i].getInformacao() + "    " + this.tabela[i].imprimir());
         }
     }
