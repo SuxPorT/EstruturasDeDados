@@ -1,7 +1,7 @@
 package AlgoritmosDeOrdenacao;
 
 // Autor: HenriqueIni
-// Fonte: https://github.com/BlogCyberini/Algoritmos-de-Ordenacao/blob/master/SelectionSort/Java/SelectionSort.java
+// Fonte: https://github.com/BlogCyberini/Algoritmos-de-Ordenacao/blob/master/MergeSort/Java/MergeSort.java
 
 public class MergeSort {
     public static void mergeSort(int A[], int inicio, int fim){
