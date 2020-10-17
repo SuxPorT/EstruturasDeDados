@@ -15,4 +15,5 @@ características:
     - Conjuntos ordenados em ordem decrescente.
 
 - A saída do sistema deverá ser da seguinte forma:
+
 ![image](https://user-images.githubusercontent.com/51892110/96351020-388c0400-108f-11eb-872a-25746d02027e.png)
